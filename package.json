@@ -1,6 +1,14 @@
 {
-  "name": "bff-dev-tools",
+  "name": "one-site",
+  "version": "1.0.0",
   "private": true,
+  "description": "One Site project - A site to host any and all portfolio info, side hustle whatnot, and sandbox experiments. Written in Nuxt and Vue.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tannersatchwell/one-site.git"
+  },
+  "license": "MIT",
+  "author": "Tanner Satchwell",
   "type": "module",
   "scripts": {
     "build": "nuxt build",

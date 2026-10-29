@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import BFFSidebar from "~/components/BFFSidebar.vue";
+import BFFSidebar from "~/components/bff/BFFSidebar.vue";
 </script>
 
 <template>

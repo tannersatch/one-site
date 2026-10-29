@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import BFFHeader from "./components/BFFHeader.vue";
+import Header from "./components/Header.vue";
 </script>
 
 <template>
@@ -10,7 +10,7 @@ import BFFHeader from "./components/BFFHeader.vue";
       color="warning"
     />
 
-    <BFFHeader />
+    <Header />
 
     <NuxtLayout>
       <NuxtPage />
