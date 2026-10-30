@@ -9,8 +9,8 @@ commit before starting the next increment. Do not commit automatically.
 | 1         | JSON formatter        | Strict validation, format/minify, indentation, copy, lossless numbers   | Committed                      |
 | 2         | SQL formatter         | SQL dialect selection, format, copy, examples                           | Committed                      |
 | 3         | JSON to TypeScript    | Root type name, nested objects/arrays, generated types, copy            | Committed                      |
-| 4         | YAML / JSON converter | Both directions, parser errors, copy; document YAML-to-JSON limitations | Complete; awaiting user commit |
-| 5         | Unix timestamp        | Seconds/milliseconds, UTC/local dates, current time, copy               | Pending                        |
+| 4         | JSON / YAML converter | Both directions, parser errors, copy; document YAML-to-JSON limitations | Committed                      |
+| 5         | Unix timestamp        | Seconds/milliseconds, UTC/local dates, current time, copy               | Complete; awaiting user commit |
 | 6         | Markdown previewer    | Live preview, sanitized HTML, safe external links                       | Pending                        |
 | 7         | Diff checker          | Two inputs, line/word changes, whitespace options                       | Pending                        |
 | 8         | Regex tester          | Flags, matches/groups, invalid expressions, worker timeout              | Pending                        |
@@ -78,3 +78,20 @@ commit before starting the next increment. Do not commit automatically.
   indentation, examples, clearing, and copy controls; invalid input clears output.
 - Verify local processing, error recovery, directory/mobile registration, both
   themes, and responsive layouts. Run all tool tests before the commit pause.
+
+## Increment 5 Acceptance Checks
+
+- Convert Unix seconds (up to three decimal places) and whole milliseconds without
+  rounding; support epoch zero, negative timestamps, and native Date range limits.
+- Convert calendar input in explicitly selected UTC or browser-local time. Reject
+  invalid calendar dates, unsupported date syntax, and nonexistent local DST times;
+  use the earlier occurrence for ambiguous local times.
+- Preserve the selected instant when changing units or time zone. Calendar input
+  uses `YYYY-MM-DDTHH:mm:ss.SSS` without a time-zone suffix; seconds are optional.
+- Show copyable seconds, milliseconds, ISO UTC, and browser-local results.
+- Show a client-side live Unix clock without overwriting user input. Include Now,
+  Epoch, and Clear actions, and clean up timers when leaving the page.
+- Invalid or cleared input must remove converted results rather than leave stale
+  values available for copying. The independent current-time readout stays active.
+- Verify clipboard actions, selectors, both themes, directory/mobile registration,
+  and responsive layouts. Run the entire tool test suite before the commit pause.

@@ -12,6 +12,16 @@ export interface DeveloperTool {
 
 export const tools: DeveloperTool[] = [
   {
+    id: "unix-timestamp",
+    title: "Unix Timestamp",
+    description: "Convert Unix seconds and milliseconds to UTC or local dates and back.",
+    category: "Dates & time",
+    icon: "i-lucide-clock-3",
+    to: "/tools/unix-timestamp",
+    keywords: ["unix", "timestamp", "epoch", "date", "time", "seconds", "milliseconds", "utc", "timezone"],
+    tags: ["UTC / Local", "Milliseconds"],
+  },
+  {
     id: "yaml-json-converter",
     title: "JSON / YAML Converter",
     description: "Convert YAML and JSON in either direction with safe alias handling and exact integers.",
