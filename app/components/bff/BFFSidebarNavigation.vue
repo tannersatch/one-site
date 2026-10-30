@@ -7,14 +7,13 @@ withDefaults(defineProps<{ collapsed?: boolean }>(), {
 });
 defineEmits<{ expand: [] }>();
 
-const items: NavigationMenuItem[][] = [[
-  { label: "Home", icon: "i-lucide-home", to: "/tools" },
-  ...tools.map(tool => ({
-    label: tool.navigationLabel ?? tool.title,
-    icon: tool.icon,
-    to: tool.to,
-  })),
-], [
+const home: NavigationMenuItem = {
+  label: "Home",
+  icon: "i-lucide-home",
+  to: "/tools",
+  exact: true,
+};
+const supportItems: NavigationMenuItem[] = [
   {
     label: "Feedback",
     icon: "i-lucide-message-circle",
@@ -27,19 +26,47 @@ const items: NavigationMenuItem[][] = [[
     to: "https://github.com/nuxt/ui",
     target: "_blank",
   },
-]];
+];
 
 const searchQuery = ref("");
-const filteredItems = computed(() => {
+const navigation = computed(() => {
   const query = searchQuery.value.trim().toLocaleLowerCase();
-  return items.map(group =>
-    group.filter(item =>
-      !query || item.label?.toLocaleLowerCase().includes(query)
+  const matches = (value: string) => value.toLocaleLowerCase().includes(query);
+  const categories = [...new Set(tools.map(tool => tool.category))].sort((
+    first,
+    second,
+  ) => first.localeCompare(second));
+  const groups: NavigationMenuItem[][] = matches(home.label ?? "")
+    ? [[home]]
+    : [];
+  for (const category of categories) {
+    const links = tools.filter(tool =>
+      tool.category === category
+      && (matches(category) || matches(tool.navigationLabel ?? tool.title)
+        || matches(tool.title))
     )
-  );
+      .sort((first, second) =>
+        (first.navigationLabel ?? first.title).localeCompare(
+          second.navigationLabel ?? second.title,
+        )
+      )
+      .map(tool => ({
+        label: tool.navigationLabel ?? tool.title,
+        icon: tool.icon,
+        to: tool.to,
+        exact: true,
+      }));
+    if (links.length) {
+      groups.push([{ label: category, type: "label" }, ...links]);
+    }
+  }
+  return {
+    groups,
+    support: supportItems.filter(item => matches(item.label ?? "")),
+  };
 });
 const hasResults = computed(() =>
-  filteredItems.value.some(group => group.length > 0)
+  navigation.value.groups.length > 0 || navigation.value.support.length > 0
 );
 </script>
 
@@ -78,9 +105,9 @@ const hasResults = computed(() =>
     </UInput>
 
     <UNavigationMenu
-      v-if="filteredItems[0]?.length"
+      v-if="navigation.groups.length"
       :collapsed="collapsed"
-      :items="filteredItems[0]"
+      :items="navigation.groups"
       orientation="vertical"
     />
     <p v-if="!hasResults" class="search-empty" role="status">
@@ -89,9 +116,9 @@ const hasResults = computed(() =>
 
     <div class="secondary-navigation">
       <UNavigationMenu
-        v-if="filteredItems[1]?.length"
+        v-if="navigation.support.length"
         :collapsed="collapsed"
-        :items="filteredItems[1]"
+        :items="navigation.support"
         orientation="vertical"
       />
     </div>
