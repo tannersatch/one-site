@@ -1,10 +1,5 @@
 <script setup lang="ts">
 import BFFSidebarNavigation from "./BFFSidebarNavigation.vue";
-
-const avatar = {
-  src: "https://github.com/benjamincanac.png",
-  loading: "lazy" as const,
-};
 </script>
 
 <template>
@@ -17,26 +12,30 @@ const avatar = {
     <template #default="{ collapsed, collapse }">
       <BFFSidebarNavigation
         :collapsed="collapsed"
-        collapsible
         @expand="collapse(false)"
       />
     </template>
 
     <template #footer="{ collapsed }">
-      <UButton
-        :avatar="avatar"
-        :label="collapsed ? undefined : 'Benjamin'"
-        color="neutral"
-        variant="ghost"
-        class="profile-button"
-        :block="collapsed"
-      />
+      <UTooltip :text="collapsed ? 'Expand sidebar' : 'Collapse sidebar'">
+        <UDashboardSidebarCollapse
+          :label="collapsed ? undefined : 'Collapse sidebar'"
+          :square="collapsed"
+          class="sidebar-collapse"
+          :class="{ 'sidebar-collapse--collapsed': collapsed }"
+        />
+      </UTooltip>
     </template>
   </UDashboardSidebar>
 </template>
 
 <style scoped>
-.profile-button {
+.sidebar-collapse {
   width: 100%;
+  justify-content: flex-start;
+}
+
+.sidebar-collapse--collapsed {
+  justify-content: center;
 }
 </style>

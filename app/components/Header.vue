@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from "@nuxt/ui";
+import { sites } from "~/data/sites";
 import BFFBanner from "./bff/BFFBanner.vue";
 import BFFSidebarNavigation from "./bff/BFFSidebarNavigation.vue";
 
@@ -11,21 +12,11 @@ const items = computed<NavigationMenuItem[]>(() => [
     to: "/",
     active: route.path === "/",
   },
-  {
-    label: "Portfolio",
-    to: "/portfolio",
-    active: route.path.startsWith("/portfolio"),
-  },
-  {
-    label: "Big Foot Forward LLC",
-    to: "/bff",
-    active: route.path.startsWith("/bff"),
-  },
-  {
-    label: "Dev Tools",
-    to: "/tools",
-    active: route.path.startsWith("/tools"),
-  },
+  ...sites.map(site => ({
+    label: site.navigationLabel ?? site.title,
+    to: site.to,
+    active: route.path === site.to || route.path.startsWith(`${site.to}/`),
+  })),
 ]);
 
 const headerTitle = computed(() => {

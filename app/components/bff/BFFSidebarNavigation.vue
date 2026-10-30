@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from "@nuxt/ui";
 
-withDefaults(defineProps<{ collapsed?: boolean; collapsible?: boolean }>(), {
+withDefaults(defineProps<{ collapsed?: boolean }>(), {
   collapsed: false,
-  collapsible: false,
 });
 defineEmits<{ expand: [] }>();
 
@@ -95,17 +94,6 @@ const hasResults = computed(() =>
         :items="filteredItems[1]"
         orientation="vertical"
       />
-      <UTooltip
-        v-if="collapsible"
-        :text="collapsed ? 'Expand sidebar' : 'Collapse sidebar'"
-      >
-        <UDashboardSidebarCollapse
-          :label="collapsed ? undefined : 'Collapse sidebar'"
-          :square="collapsed"
-          class="sidebar-collapse"
-          :class="{ 'sidebar-collapse--collapsed': collapsed }"
-        />
-      </UTooltip>
     </div>
   </div>
 </template>
@@ -129,17 +117,7 @@ const hasResults = computed(() =>
   color: var(--ui-text-muted);
 }
 .secondary-navigation {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
   margin-top: auto;
   flex-shrink: 0;
-}
-.sidebar-collapse {
-  width: 100%;
-  justify-content: flex-start;
-}
-.sidebar-collapse--collapsed {
-  justify-content: center;
 }
 </style>
