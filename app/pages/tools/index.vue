@@ -71,19 +71,48 @@ const romanExample = decimalToRoman("2026");
           :key="tool.id"
           :tool="tool"
         >
-          <template
-            v-if="tool.id === 'jwt'"
-            #preview
-          ><div class="token-preview">
+          <template #preview><div
+              v-if="tool.id === 'jwt'"
+              class="token-preview"
+            >
               <span>JWT / JSON</span><code>{ "name": "John Doe", "admin": true
                 }</code>
-            </div></template>
-          <template
-            v-else-if="tool.id === 'roman-numerals'"
-            #preview
-          ><div class="numeral-preview">
+            </div><div
+              v-else-if="tool.id === 'roman-numerals'"
+              class="numeral-preview"
+            >
               <span>2026</span><UIcon name="i-lucide-arrow-left-right" /><strong
               >{{ romanExample }}</strong>
+            </div><div
+              v-else-if="tool.id === 'color-contrast-checker'"
+              class="contrast-preview"
+            >
+              <strong>4.5:1</strong><span>AA pass</span><i />
+            </div><div
+              v-else-if="tool.id === 'cron-expression-explainer'"
+              class="cron-preview"
+            >
+              <code>0 9 * * 1-5</code><span>Weekdays at 09:00</span>
+            </div><div
+              v-else-if="tool.id === 'url-codec'"
+              class="codec-preview"
+            >
+              <code>hello%20world</code><UIcon
+                name="i-lucide-arrow-left-right"
+              /><span>hello world</span>
+            </div><div
+              v-else-if="tool.id === 'base64-codec'"
+              class="codec-preview"
+            >
+              <code>SGVsbG8sIHdvcmxkIQ==</code><UIcon
+                name="i-lucide-arrow-left-right"
+              /><span>Hello, world!</span>
+            </div><div
+              v-else-if="tool.id === 'uuid-generator'"
+              class="uuid-preview"
+            >
+              <UIcon name="i-lucide-fingerprint" /><code
+              >01941f29-7c00-73e4</code><span>UUID v7</span>
             </div></template>
         </ToolDirectoryItem>
       </div>
@@ -175,6 +204,45 @@ h2 {
 }
 .numeral-preview strong {
   font-weight: 600;
+  color: var(--ui-primary);
+}
+.contrast-preview, .cron-preview, .codec-preview, .uuid-preview {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+  min-width: 0;
+  font-size: 0.75rem;
+}
+.contrast-preview strong {
+  color: var(--ui-text-highlighted);
+  font-size: 1.5rem;
+  font-variant-numeric: tabular-nums;
+}
+.contrast-preview span, .cron-preview span, .uuid-preview span {
+  color: var(--ui-text-muted);
+}
+.contrast-preview i {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+  background: var(--ui-success);
+}
+.cron-preview, .codec-preview, .uuid-preview {
+  font-family: var(--font-mono, monospace);
+}
+.cron-preview, .uuid-preview {
+  flex-direction: column;
+}
+.cron-preview code, .codec-preview code, .uuid-preview code {
+  overflow-wrap: anywhere;
+  color: var(--ui-text-highlighted);
+}
+.codec-preview .iconify, .uuid-preview .iconify {
+  width: 1rem;
+  height: 1rem;
   color: var(--ui-primary);
 }
 .empty-results {

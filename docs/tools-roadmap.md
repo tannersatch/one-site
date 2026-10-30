@@ -4,17 +4,18 @@ Implement one tool per increment. After each increment, run its tests, formattin
 production build, and desktop/mobile browser checks. Stop for review and a user
 commit before starting the next increment. Do not commit automatically.
 
-| Increment | Tool                   | Scope                                                                   | Status                         |
-| --------- | ---------------------- | ----------------------------------------------------------------------- | ------------------------------ |
-| 1         | JSON formatter         | Strict validation, format/minify, indentation, copy, lossless numbers   | Committed                      |
-| 2         | SQL formatter          | SQL dialect selection, format, copy, examples                           | Committed                      |
-| 3         | JSON to TypeScript     | Root type name, nested objects/arrays, generated types, copy            | Committed                      |
-| 4         | JSON / YAML converter  | Both directions, parser errors, copy; document YAML-to-JSON limitations | Committed                      |
-| 5         | Unix timestamp         | Seconds/milliseconds, UTC/local dates, current time, copy               | Committed                      |
-| 6         | Markdown previewer     | Live preview, sanitized HTML, safe external links                       | Committed                      |
-| 7         | Diff checker           | Two inputs, line/word changes, whitespace options                       | Committed                      |
-| 8         | Regex tester           | Flags, matches/groups, invalid expressions, worker timeout              | Complete; awaiting user commit |
-| 9         | CSS gradient generator | Linear/radial/mesh modes, editable colors, opacity, presets, CSS        | Complete; awaiting user commit |
+| Increment | Tool                                          | Scope                                                                   | Status                         |
+| --------- | --------------------------------------------- | ----------------------------------------------------------------------- | ------------------------------ |
+| 1         | JSON formatter                                | Strict validation, format/minify, indentation, copy, lossless numbers   | Committed                      |
+| 2         | SQL formatter                                 | SQL dialect selection, format, copy, examples                           | Committed                      |
+| 3         | JSON to TypeScript                            | Root type name, nested objects/arrays, generated types, copy            | Committed                      |
+| 4         | JSON / YAML converter                         | Both directions, parser errors, copy; document YAML-to-JSON limitations | Committed                      |
+| 5         | Unix timestamp                                | Seconds/milliseconds, UTC/local dates, current time, copy               | Committed                      |
+| 6         | Markdown previewer                            | Live preview, sanitized HTML, safe external links                       | Committed                      |
+| 7         | Diff checker                                  | Two inputs, line/word changes, whitespace options                       | Committed                      |
+| 8         | Regex tester                                  | Flags, matches/groups, invalid expressions, worker timeout              | Complete; awaiting user commit |
+| 9         | CSS gradient generator                        | Linear/radial/mesh modes, editable colors, opacity, presets, CSS        | Complete; awaiting user commit |
+| 10-14     | URL, Base64, UUID, color contrast, cron tools | Local codecs, RFC UUIDs, WCAG contrast, timezone-aware schedules        | Complete; awaiting user commit |
 
 ## Shared Conventions
 
