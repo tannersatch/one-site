@@ -8,8 +8,8 @@ commit before starting the next increment. Do not commit automatically.
 | --------- | --------------------- | ----------------------------------------------------------------------- | ------------------------------ |
 | 1         | JSON formatter        | Strict validation, format/minify, indentation, copy, lossless numbers   | Committed                      |
 | 2         | SQL formatter         | SQL dialect selection, format, copy, examples                           | Committed                      |
-| 3         | JSON to TypeScript    | Root type name, nested objects/arrays, generated types, copy            | Complete; awaiting user commit |
-| 4         | YAML / JSON converter | Both directions, parser errors, copy; document YAML-to-JSON limitations | Pending                        |
+| 3         | JSON to TypeScript    | Root type name, nested objects/arrays, generated types, copy            | Committed                      |
+| 4         | YAML / JSON converter | Both directions, parser errors, copy; document YAML-to-JSON limitations | Complete; awaiting user commit |
 | 5         | Unix timestamp        | Seconds/milliseconds, UTC/local dates, current time, copy               | Pending                        |
 | 6         | Markdown previewer    | Live preview, sanitized HTML, safe external links                       | Pending                        |
 | 7         | Diff checker          | Two inputs, line/word changes, whitespace options                       | Pending                        |
@@ -62,3 +62,19 @@ commit before starting the next increment. Do not commit automatically.
   must remove old output and disable copying.
 - Verify clipboard actions, directory/mobile registration, both themes, and
   responsive layouts; run inference, JSON, and SQL tests before pausing for commit.
+
+## Increment 4 Acceptance Checks
+
+- Convert in both directions using YAML 1.2 core schema and strict JSON parsing.
+- Preserve nested values, root scalars/collections, and arbitrarily large integer
+  values. Fractional numbers use JavaScript precision; non-finite/out-of-range
+  floating-point values are rejected.
+- Expand aliases and merge keys with an alias-expansion limit of 100; reject cycles,
+  non-string mapping keys, unsupported tags/value types, and duplicate keys.
+- Accept one document only; reject explicit YAML 1.1 documents.
+- Document that comments, scalar styles, and anchor names are not preserved. JSON
+  represents the expanded values, not the original YAML notation.
+- Switching directions uses valid output as the next input. Offer two-/four-space
+  indentation, examples, clearing, and copy controls; invalid input clears output.
+- Verify local processing, error recovery, directory/mobile registration, both
+  themes, and responsive layouts. Run all tool tests before the commit pause.

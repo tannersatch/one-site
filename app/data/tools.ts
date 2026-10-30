@@ -12,6 +12,16 @@ export interface DeveloperTool {
 
 export const tools: DeveloperTool[] = [
   {
+    id: "yaml-json-converter",
+    title: "JSON / YAML Converter",
+    description: "Convert YAML and JSON in either direction with safe alias handling and exact integers.",
+    category: "Data conversion",
+    icon: "i-lucide-file-code",
+    to: "/tools/yaml-json-converter",
+    keywords: ["yaml", "yml", "json", "convert", "configuration", "config", "serialize"],
+    tags: ["YAML 1.2", "Two-way"],
+  },
+  {
     id: "json-to-typescript",
     title: "JSON to TypeScript",
     description: "Infer TypeScript types from JSON with nested objects, arrays, and optional properties.",
