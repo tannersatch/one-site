@@ -152,6 +152,7 @@ onBeforeUnmount(() => clearTimeout(copyTimer));
 }
 @media (min-width: 900px) {
   .jwt-editor--token .editor-input :deep(textarea) {
+    height: 100%;
     min-height: 32rem;
   }
 }

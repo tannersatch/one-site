@@ -16,6 +16,12 @@ import BFFSidebar from "~/components/bff/BFFSidebar.vue";
   top: 112px;
   max-height: calc(100vh - 112px);
 }
+.dashboard :deep(.sidebar) {
+  min-height: 0;
+}
+.dashboard :deep(.sidebar-footer) {
+  border-top: 1px solid var(--ui-border);
+}
 .page {
   display: flex;
   flex: 1;

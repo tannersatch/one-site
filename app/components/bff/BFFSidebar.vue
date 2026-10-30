@@ -1,56 +1,28 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from "@nuxt/ui";
-import BFFIcon from "./BFFIcon.vue";
 
 const avatar = {
   src: "https://github.com/benjamincanac.png",
   loading: "lazy" as const,
 };
 
-const items: NavigationMenuItem[][] = [[{
-  label: "Home",
-  icon: "i-lucide-house",
-  to: "/",
-}, {
-  label: "About",
-  icon: "i-lucide-info",
-  badge: "4",
-  to: "/about",
-}, {
-  label: "Portfolio",
-  icon: "i-lucide-gallery-vertical-end",
-  defaultOpen: true,
-  children: [
-    {
-      label: "Roman Numeral Calculator",
-      icon: "i-lucide-calculator",
-      to: "/portfolio/roman-numerals",
-    },
-    {
-      label: "FileShadow, Inc.",
-      icon: "i-lucide-file",
-      to: "https://portal.fileshadow.com",
-      target: "_blank",
-    },
-    {
-      label: "Glow Permanent Lighting",
-      icon: "i-lucide-lightbulb",
-      to: "https://www.glowpermanentlights.com/",
-      target: "_blank",
-    },
-  ],
-}, {
-  label: "Dev Tools",
-  icon: "i-lucide-code",
-  defaultOpen: true,
-  children: [
-    {
-      label: "JWT Decoder",
-      icon: "i-lucide-braces",
-      to: "/tools/jwt-decode",
-    },
-  ],
-}], [{
+const items: NavigationMenuItem[][] = [[
+  {
+    label: "Home",
+    icon: "i-lucide-home",
+    to: "/tools",
+  },
+  {
+    label: "JWT Decoder",
+    icon: "i-lucide-braces",
+    to: "/tools/jwt-decode",
+  },
+  {
+    label: "Roman Numeral Converter",
+    icon: "i-lucide-landmark",
+    to: "/tools/roman-numeral-converter",
+  },
+], [{
   label: "Feedback",
   icon: "i-lucide-message-circle",
   to: "https://github.com/nuxt-ui-templates/dashboard",
@@ -61,85 +33,112 @@ const items: NavigationMenuItem[][] = [[{
   to: "https://github.com/nuxt/ui",
   target: "_blank",
 }]];
+
+const searchQuery = ref("");
+const filteredItems = computed(() => {
+  const query = searchQuery.value.trim().toLocaleLowerCase();
+  return items.map(group =>
+    group.filter(item =>
+      !query || item.label?.toLocaleLowerCase().includes(query)
+    )
+  );
+});
+const hasResults = computed(() =>
+  filteredItems.value.some(group => group.length > 0)
+);
 </script>
 
 <template>
-  <div class="sidebar-scope">
-    <UDashboardSidebar
-      collapsible
-      resizable
-      class="sidebar"
-      :ui="{ footer: 'sidebar-footer' }"
-    >
-      <template #default="{ collapsed }">
-        <UButton
-          :label="collapsed ? undefined : 'Search...'"
-          icon="i-lucide-search"
-          color="neutral"
-          variant="outline"
-          block
-          :square="collapsed"
-        >
-          <template v-if="!collapsed" #trailing>
-            <div class="search-shortcut">
-              <UKbd value="meta" variant="subtle" />
-              <UKbd value="K" variant="subtle" />
-            </div>
-          </template>
-        </UButton>
+  <UDashboardSidebar
+    collapsible
+    resizable
+    class="sidebar"
+    :ui="{ footer: 'sidebar-footer' }"
+  >
+    <template #default="{ collapsed, collapse }">
+      <UButton
+        v-if="collapsed"
+        icon="i-lucide-search"
+        aria-label="Expand sidebar to search"
+        color="neutral"
+        variant="outline"
+        block
+        square
+        @click="collapse(false)"
+      />
+      <UInput
+        v-else
+        v-model="searchQuery"
+        icon="i-lucide-search"
+        placeholder="Search links..."
+        aria-label="Search sidebar links"
+        autocomplete="off"
+        class="sidebar-search"
+        @keydown.esc="searchQuery = ''"
+      >
+        <template v-if="searchQuery" #trailing>
+          <UButton
+            icon="i-lucide-x"
+            aria-label="Clear sidebar search"
+            color="neutral"
+            variant="ghost"
+            size="xs"
+            @click="searchQuery = ''"
+          />
+        </template>
+      </UInput>
 
+      <UNavigationMenu
+        v-if="filteredItems[0]?.length"
+        :collapsed="collapsed"
+        :items="filteredItems[0]"
+        orientation="vertical"
+      />
+
+      <p v-if="!hasResults" class="search-empty" role="status">
+        No matching links.
+      </p>
+
+      <div v-if="filteredItems[1]?.length" class="secondary-navigation">
         <UNavigationMenu
           :collapsed="collapsed"
-          :items="items[0]"
+          :items="filteredItems[1]"
           orientation="vertical"
         />
+      </div>
+    </template>
 
-        <UNavigationMenu
-          :collapsed="collapsed"
-          :items="items[1]"
-          orientation="vertical"
-          class="secondary-navigation"
-        />
-      </template>
-
-      <template #footer="{ collapsed }">
-        <UButton
-          :avatar="avatar"
-          :label="collapsed ? undefined : 'Benjamin'"
-          color="neutral"
-          variant="ghost"
-          class="profile-button"
-          :block="collapsed"
-        />
-      </template>
-    </UDashboardSidebar>
-  </div>
+    <template #footer="{ collapsed }">
+      <UButton
+        :avatar="avatar"
+        :label="collapsed ? undefined : 'Benjamin'"
+        color="neutral"
+        variant="ghost"
+        class="profile-button"
+        :block="collapsed"
+      />
+    </template>
+  </UDashboardSidebar>
 </template>
 
 <style scoped>
-.sidebar-scope {
-  display: contents;
+.sidebar-search {
+  width: 100%;
 }
-.sidebar-scope :deep(.sidebar) {
-  min-height: 0;
-}
-.search-shortcut {
-  display: flex;
-  align-items: center;
-  gap: 0.125rem;
-  margin-inline-start: auto;
+
+.search-empty {
+  margin: 0;
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--ui-text-muted);
 }
 
 .secondary-navigation {
-  background: red;
-  margin-top: auto !important;
+  margin-top: auto;
+  flex-shrink: 0;
 }
 
 .profile-button {
   width: 100%;
-}
-
-.sidebar-scope :deep(.sidebar-footer) {
-  border-top: 1px solid var(--ui-border);
 }
 </style>
