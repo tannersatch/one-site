@@ -12,6 +12,16 @@ export interface DeveloperTool {
 
 export const tools: DeveloperTool[] = [
   {
+    id: "json-formatter",
+    title: "JSON Formatter",
+    description: "Format, minify, and validate JSON without changing numeric values.",
+    category: "Formatting & validation",
+    icon: "i-lucide-braces",
+    to: "/tools/json-formatter",
+    keywords: ["json", "pretty", "print", "format", "minify", "validate", "indent"],
+    tags: ["JSON", "Lossless"],
+  },
+  {
     id: "jwt",
     title: "JWT Encode / Decode",
     navigationLabel: "JWT Decoder",
