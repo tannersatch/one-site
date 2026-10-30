@@ -1,5 +1,11 @@
 <script setup lang="ts">
-defineProps<{ title?: string }>();
+withDefaults(
+  defineProps<{ title?: string; clearLabel?: string; clearIcon?: string }>(),
+  {
+    clearLabel: "Clear",
+    clearIcon: "i-lucide-eraser",
+  },
+);
 defineEmits<{ clear: [] }>();
 </script>
 
@@ -14,11 +20,11 @@ defineEmits<{ clear: [] }>();
     <div class="toolbar-actions">
       <slot name="actions" />
       <UButton
-        icon="i-lucide-eraser"
+        :icon="clearIcon"
         color="neutral"
         variant="ghost"
         @click="$emit('clear')"
-      >Clear</UButton>
+      >{{ clearLabel }}</UButton>
     </div>
   </div>
 </template>

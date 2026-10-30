@@ -4,16 +4,17 @@ Implement one tool per increment. After each increment, run its tests, formattin
 production build, and desktop/mobile browser checks. Stop for review and a user
 commit before starting the next increment. Do not commit automatically.
 
-| Increment | Tool                  | Scope                                                                   | Status                         |
-| --------- | --------------------- | ----------------------------------------------------------------------- | ------------------------------ |
-| 1         | JSON formatter        | Strict validation, format/minify, indentation, copy, lossless numbers   | Committed                      |
-| 2         | SQL formatter         | SQL dialect selection, format, copy, examples                           | Committed                      |
-| 3         | JSON to TypeScript    | Root type name, nested objects/arrays, generated types, copy            | Committed                      |
-| 4         | JSON / YAML converter | Both directions, parser errors, copy; document YAML-to-JSON limitations | Committed                      |
-| 5         | Unix timestamp        | Seconds/milliseconds, UTC/local dates, current time, copy               | Committed                      |
-| 6         | Markdown previewer    | Live preview, sanitized HTML, safe external links                       | Committed                      |
-| 7         | Diff checker          | Two inputs, line/word changes, whitespace options                       | Committed                      |
-| 8         | Regex tester          | Flags, matches/groups, invalid expressions, worker timeout              | Complete; awaiting user commit |
+| Increment | Tool                   | Scope                                                                   | Status                         |
+| --------- | ---------------------- | ----------------------------------------------------------------------- | ------------------------------ |
+| 1         | JSON formatter         | Strict validation, format/minify, indentation, copy, lossless numbers   | Committed                      |
+| 2         | SQL formatter          | SQL dialect selection, format, copy, examples                           | Committed                      |
+| 3         | JSON to TypeScript     | Root type name, nested objects/arrays, generated types, copy            | Committed                      |
+| 4         | JSON / YAML converter  | Both directions, parser errors, copy; document YAML-to-JSON limitations | Committed                      |
+| 5         | Unix timestamp         | Seconds/milliseconds, UTC/local dates, current time, copy               | Committed                      |
+| 6         | Markdown previewer     | Live preview, sanitized HTML, safe external links                       | Committed                      |
+| 7         | Diff checker           | Two inputs, line/word changes, whitespace options                       | Committed                      |
+| 8         | Regex tester           | Flags, matches/groups, invalid expressions, worker timeout              | Complete; awaiting user commit |
+| 9         | CSS gradient generator | Linear/radial/mesh modes, editable colors, opacity, presets, CSS        | Complete; awaiting user commit |
 
 ## Shared Conventions
 
@@ -152,3 +153,37 @@ commit before starting the next increment. Do not commit automatically.
   recovery/cancellation, safe markup handling, flags, captures, both themes,
   directory/mobile registration, and responsive layouts. Run the full suite and
   production build before pausing for the final commit.
+
+## Increment 9 Acceptance Checks
+
+- Generate linear, radial, and mesh CSS using validated settings, with 2-8 stops or points,
+  editable 3-/6-digit hex colors, positions, and individual opacity.
+- Offer angle controls for linear gradients and circle/ellipse shapes and center
+  controls for radial gradients. Sort output stops without mutating editor order;
+  retain equal-position stops for hard transitions.
+- Include presets, Add/Remove, Reverse, Reset, and copied CSS. Bound positions and
+  opacity to 0-100 and reject non-finite numeric values or arbitrary CSS input.
+- Match the live preview to the generated shorthand declarations for linear/radial
+  gradients. Mesh output uses an independent background color and ordered radial
+  background-image layers. Show a checkerboard behind transparent gradients.
+- Invalid settings clear copied output rather than leave stale CSS available.
+- Keep processing local and styles scoped. Extend shared toolbar labels only with
+  defaults that preserve existing tools' Clear behavior.
+- Verify browser CSS support, selectors/sliders, the mobile color picker, stop
+  limits, both themes, directory/mobile registration, responsive layouts, and the
+  existing JSON tool's Clear action. Run all tests and the production build.
+- Mesh points expose color, opacity, X/Y position, and 1-100% spread. Preserve
+  front-to-back layer order; Reverse layers changes paint order, not coordinates.
+- Default to a three-color pastel mesh. Keep mesh state independent from
+  linear/radial stops when switching modes.
+- Provide numbered color dots on the mesh preview for mouse/touch positioning,
+  pointer capture, 0-100% clamping, and synchronized X/Y sliders and CSS. Arrow keys
+  move one percent; Shift+Arrow moves ten percent. Keep edge dots fully reachable
+  and clear drag state when capture ends or the dragged point is removed/reset.
+- Extend the shared overlay to linear/radial color stops with resize-aware guides.
+  Lock linear dragging to the selected CSS angle; radial stops follow an outward
+  guide from the configured center. Project off-axis pointer motion onto the guide,
+  clamp positions to 0-100%, and synchronize sliders and generated CSS. Support
+  mouse/touch, arrows, Shift+Arrow, and Home/End without changing mesh behavior.
+- Reuse `GradientColorInput` for stops, points, and the mesh background; verify the
+  new point controls, base color, copied CSS, min/max counts, and mobile picker.

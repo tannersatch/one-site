@@ -12,6 +12,16 @@ export interface DeveloperTool {
 
 export const tools: DeveloperTool[] = [
   {
+    id: "css-gradient-generator",
+    title: "CSS Gradient Generator",
+    description: "Build linear, radial, and mesh gradients with editable colors, transparency, and copyable CSS.",
+    category: "CSS & design",
+    icon: "i-lucide-palette",
+    to: "/tools/css-gradient-generator",
+    keywords: ["css", "gradient", "mesh", "color", "linear", "radial", "background", "opacity", "design"],
+    tags: ["Linear / Radial / Mesh", "CSS"],
+  },
+  {
     id: "regex-tester",
     title: "Regex Tester",
     description: "Test JavaScript regex patterns with highlighted matches, capture groups, and a worker timeout.",
