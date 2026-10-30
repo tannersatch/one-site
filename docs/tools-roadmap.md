@@ -10,8 +10,8 @@ commit before starting the next increment. Do not commit automatically.
 | 2         | SQL formatter         | SQL dialect selection, format, copy, examples                           | Committed                      |
 | 3         | JSON to TypeScript    | Root type name, nested objects/arrays, generated types, copy            | Committed                      |
 | 4         | JSON / YAML converter | Both directions, parser errors, copy; document YAML-to-JSON limitations | Committed                      |
-| 5         | Unix timestamp        | Seconds/milliseconds, UTC/local dates, current time, copy               | Complete; awaiting user commit |
-| 6         | Markdown previewer    | Live preview, sanitized HTML, safe external links                       | Pending                        |
+| 5         | Unix timestamp        | Seconds/milliseconds, UTC/local dates, current time, copy               | Committed                      |
+| 6         | Markdown previewer    | Live preview, sanitized HTML, safe external links                       | Complete; awaiting user commit |
 | 7         | Diff checker          | Two inputs, line/word changes, whitespace options                       | Pending                        |
 | 8         | Regex tester          | Flags, matches/groups, invalid expressions, worker timeout              | Pending                        |
 
@@ -95,3 +95,21 @@ commit before starting the next increment. Do not commit automatically.
   values available for copying. The independent current-time readout stays active.
 - Verify clipboard actions, selectors, both themes, directory/mobile registration,
   and responsive layouts. Run the entire tool test suite before the commit pause.
+
+## Increment 6 Acceptance Checks
+
+- Render Markdown live using an established parser, including GFM tables,
+  strikethrough, task lists, block quotes, and fenced code blocks.
+- Sanitize generated HTML before both rendering and copying. Remove scripts,
+  executable embeds, event handlers, inline styles, and unsafe URL schemes.
+- Open non-fragment links with `noopener noreferrer nofollow`; disallow
+  protocol-relative links. Task checkboxes remain disabled.
+- Block images by default. Allow only explicit HTTP(S) image URLs after opt-in,
+  with lazy loading and no-referrer requests; keep relative/data URLs blocked.
+- Provide Preview/HTML tabs, copying, examples, and clearing. Empty input must
+  remove old output and disable copying.
+- Keep typed content local and unpersisted; disclose when remote image requests
+  are enabled.
+- Verify sanitization in the browser, zero default image requests, opt-in loading,
+  long-content containment, both themes, directory/mobile links, and responsive
+  layouts. Run all tool tests before the commit pause.

@@ -12,6 +12,16 @@ export interface DeveloperTool {
 
 export const tools: DeveloperTool[] = [
   {
+    id: "markdown-previewer",
+    title: "Markdown Previewer",
+    description: "Preview Markdown and sanitized HTML with tables, task lists, and safe links.",
+    category: "Writing & markup",
+    icon: "i-lucide-file-text",
+    to: "/tools/markdown-previewer",
+    keywords: ["markdown", "md", "preview", "html", "gfm", "readme", "render"],
+    tags: ["Markdown", "Sanitized"],
+  },
+  {
     id: "unix-timestamp",
     title: "Unix Timestamp",
     description: "Convert Unix seconds and milliseconds to UTC or local dates and back.",
