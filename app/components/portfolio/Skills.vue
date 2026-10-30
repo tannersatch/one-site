@@ -25,7 +25,7 @@ const skills = [
 
 <template>
   <section id="skills" class="portfolio-section" aria-labelledby="skills-title">
-    <div class="portfolio-reveal skills-heading">
+    <div v-reveal class="skills-heading">
       <p class="portfolio-eyebrow skills-eyebrow">03 / THE TOOLKIT</p>
       <h2 id="skills-title" class="portfolio-title">
         Different tools. Same curiosity<span class="skills-accent">.</span>
@@ -33,9 +33,10 @@ const skills = [
     </div>
     <div class="skills-grid">
       <div
+        v-reveal="index * 80"
         v-for="(group, index) in skills"
         :key="group.title"
-        class="portfolio-reveal skill-group"
+        class="skill-group"
       >
         <div class="skill-meta">
           <UIcon :name="group.icon" class="skill-icon" /><span>0{{

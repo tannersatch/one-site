@@ -6,6 +6,7 @@ defineProps<{ tool: DeveloperTool }>();
 
 <template>
   <NuxtLink
+    v-reveal
     :to="tool.to"
     :aria-label="tool.title"
     :aria-describedby="`directory-${tool.id}-description`"

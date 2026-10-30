@@ -22,6 +22,7 @@ useSeoMeta({
   <main class="portfolio">
     <UContainer>
       <nav
+        v-reveal
         class="portfolio-nav"
         aria-label="Portfolio sections"
       >
@@ -46,8 +47,8 @@ useSeoMeta({
       <PortfolioWork />
       <PortfolioAbout :resume-url="resumeUrl" />
       <PortfolioSkills />
-      <PortfolioContact />
-      <footer class="portfolio-footer">
+      <PortfolioContact v-reveal />
+      <footer v-reveal class="portfolio-footer">
         <span>&copy; {{ new Date().getFullYear() }} Tanner Satchwell</span>
         <span class="footer-note">Made with intention.</span>
         <a
@@ -133,26 +134,6 @@ useSeoMeta({
 .portfolio :deep(a:focus-visible) {
   outline: 2px solid var(--ui-primary);
   outline-offset: 6px;
-}
-.portfolio :deep(.portfolio-entrance) {
-  animation: arrive 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
-}
-@keyframes arrive {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@supports (animation-timeline: view()) {
-  .portfolio :deep(.portfolio-reveal) {
-    animation: arrive linear both;
-    animation-timeline: view();
-    animation-range: entry 0% entry 22%;
-  }
 }
 @media (max-width: 639px) {
   .portfolio :deep(.portfolio-section) {

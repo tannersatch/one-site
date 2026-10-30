@@ -10,7 +10,7 @@ defineProps<{ resumeUrl: string }>();
     class="intro"
     aria-labelledby="intro-title"
   >
-    <div class="portfolio-entrance intro-copy">
+    <div v-reveal class="intro-copy">
       <p class="portfolio-eyebrow intro-eyebrow">
         <span class="status-dot" /> SOFTWARE DEVELOPER & CRAFTSMAN
       </p>
@@ -33,7 +33,7 @@ defineProps<{ resumeUrl: string }>();
         >Resume</UButton>
       </div>
     </div>
-    <div class="portrait-area portfolio-entrance">
+    <div v-reveal="120" class="portrait-area">
       <div class="portrait-frame">
         <img
           :src="portraitImage"

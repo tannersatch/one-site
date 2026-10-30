@@ -8,13 +8,13 @@ defineProps<{ resumeUrl: string }>();
     class="portfolio-section about"
     aria-labelledby="about-title"
   >
-    <div class="portfolio-reveal">
+    <div v-reveal>
       <p class="portfolio-eyebrow about-eyebrow">02 / A LITTLE ABOUT ME</p>
       <h2 id="about-title" class="portfolio-title">
         A builder,<br>in every sense<span class="about-accent">.</span>
       </h2>
     </div>
-    <div class="portfolio-reveal about-copy">
+    <div v-reveal="80" class="about-copy">
       <p class="about-lead">
         From a line of code to a 3D-printed design, I love turning an idea into
         something you can actually use.
