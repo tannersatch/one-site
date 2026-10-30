@@ -64,56 +64,65 @@ const items: NavigationMenuItem[][] = [[{
 </script>
 
 <template>
-  <UDashboardSidebar
-    collapsible
-    resizable
-    :ui="{ root: 'min-h-0', footer: 'sidebar-footer' }"
-  >
-    <template #default="{ collapsed }">
-      <UButton
-        :label="collapsed ? undefined : 'Search...'"
-        icon="i-lucide-search"
-        color="neutral"
-        variant="outline"
-        block
-        :square="collapsed"
-      >
-        <template v-if="!collapsed" #trailing>
-          <div class="search-shortcut">
-            <UKbd value="meta" variant="subtle" />
-            <UKbd value="K" variant="subtle" />
-          </div>
-        </template>
-      </UButton>
+  <div class="sidebar-scope">
+    <UDashboardSidebar
+      collapsible
+      resizable
+      class="sidebar"
+      :ui="{ footer: 'sidebar-footer' }"
+    >
+      <template #default="{ collapsed }">
+        <UButton
+          :label="collapsed ? undefined : 'Search...'"
+          icon="i-lucide-search"
+          color="neutral"
+          variant="outline"
+          block
+          :square="collapsed"
+        >
+          <template v-if="!collapsed" #trailing>
+            <div class="search-shortcut">
+              <UKbd value="meta" variant="subtle" />
+              <UKbd value="K" variant="subtle" />
+            </div>
+          </template>
+        </UButton>
 
-      <UNavigationMenu
-        :collapsed="collapsed"
-        :items="items[0]"
-        orientation="vertical"
-      />
+        <UNavigationMenu
+          :collapsed="collapsed"
+          :items="items[0]"
+          orientation="vertical"
+        />
 
-      <UNavigationMenu
-        :collapsed="collapsed"
-        :items="items[1]"
-        orientation="vertical"
-        class="secondary-navigation"
-      />
-    </template>
+        <UNavigationMenu
+          :collapsed="collapsed"
+          :items="items[1]"
+          orientation="vertical"
+          class="secondary-navigation"
+        />
+      </template>
 
-    <template #footer="{ collapsed }">
-      <UButton
-        :avatar="avatar"
-        :label="collapsed ? undefined : 'Benjamin'"
-        color="neutral"
-        variant="ghost"
-        class="profile-button"
-        :block="collapsed"
-      />
-    </template>
-  </UDashboardSidebar>
+      <template #footer="{ collapsed }">
+        <UButton
+          :avatar="avatar"
+          :label="collapsed ? undefined : 'Benjamin'"
+          color="neutral"
+          variant="ghost"
+          class="profile-button"
+          :block="collapsed"
+        />
+      </template>
+    </UDashboardSidebar>
+  </div>
 </template>
 
 <style scoped>
+.sidebar-scope {
+  display: contents;
+}
+.sidebar-scope :deep(.sidebar) {
+  min-height: 0;
+}
 .search-shortcut {
   display: flex;
   align-items: center;
@@ -130,7 +139,7 @@ const items: NavigationMenuItem[][] = [[{
   width: 100%;
 }
 
-:deep(.sidebar-footer) {
+.sidebar-scope :deep(.sidebar-footer) {
   border-top: 1px solid var(--ui-border);
 }
 </style>

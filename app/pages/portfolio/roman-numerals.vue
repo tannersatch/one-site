@@ -34,7 +34,12 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 
 <template>
   <UPageHeader title="Roman Numeral Calculator" />
-  <UForm :schema="schema" :state="state" class="space-y-4" @submit="onSubmit">
+  <UForm
+    :schema="schema"
+    :state="state"
+    class="calculator-form"
+    @submit="onSubmit"
+  >
     <UFormField label="Email" name="email">
       <UInput v-model="state.email" />
     </UFormField>
@@ -48,3 +53,9 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     </UButton>
   </UForm>
 </template>
+
+<style scoped>
+.calculator-form > * + * {
+  margin-top: 1rem;
+}
+</style>

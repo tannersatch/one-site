@@ -62,18 +62,18 @@ async function submit(event: FormSubmitEvent<z.output<typeof schema>>) {
 <template>
   <section
     id="contact"
-    class="mb-8 scroll-mt-24 bg-muted px-5 py-8 sm:p-12"
+    class="contact"
     aria-labelledby="contact-title"
   >
-    <p class="portfolio-eyebrow text-muted">04 / LET'S CONNECT</p>
-    <div class="my-8 flex flex-col justify-between gap-6 sm:flex-row sm:items-center">
+    <p class="portfolio-eyebrow contact-eyebrow">04 / LET'S CONNECT</p>
+    <div class="contact-heading">
       <h2
         id="contact-title"
-        class="text-4xl leading-tight font-semibold sm:text-5xl lg:text-6xl"
+        class="contact-title"
       >
-        Have something<br>in mind<span class="text-primary">?</span>
+        Have something<br>in mind<span>?</span>
       </h2>
-      <p class="leading-relaxed text-muted">
+      <p class="contact-intro">
         I'd love to hear about it.<br>Let's make something good.
       </p>
     </div>
@@ -81,10 +81,10 @@ async function submit(event: FormSubmitEvent<z.output<typeof schema>>) {
       :schema="schema"
       :state="state"
       :disabled="submitting"
-      class="mb-8 grid gap-5"
+      class="contact-form"
       @submit="submit"
     >
-      <div class="grid gap-5 sm:grid-cols-2">
+      <div class="contact-fields">
         <UFormField label="Name" name="name" required>
           <UInput
             id="portfolio-contact-name"
@@ -92,7 +92,7 @@ async function submit(event: FormSubmitEvent<z.output<typeof schema>>) {
             autocomplete="name"
             placeholder="Your name"
             maxlength="100"
-            class="w-full"
+            class="contact-input"
             size="lg"
           />
         </UFormField>
@@ -104,7 +104,7 @@ async function submit(event: FormSubmitEvent<z.output<typeof schema>>) {
             autocomplete="email"
             placeholder="you@example.com"
             maxlength="254"
-            class="w-full"
+            class="contact-input"
             size="lg"
           />
         </UFormField>
@@ -117,7 +117,7 @@ async function submit(event: FormSubmitEvent<z.output<typeof schema>>) {
           :rows="4"
           maxlength="5000"
           autoresize
-          class="w-full"
+          class="contact-input"
           size="lg"
         />
       </UFormField>
@@ -125,7 +125,7 @@ async function submit(event: FormSubmitEvent<z.output<typeof schema>>) {
         v-model="botcheck"
         type="checkbox"
         name="botcheck"
-        class="hidden"
+        class="botcheck"
         tabindex="-1"
         autocomplete="off"
         aria-hidden="true"
@@ -153,12 +153,12 @@ async function submit(event: FormSubmitEvent<z.output<typeof schema>>) {
         :disabled="submitting"
         trailing-icon="i-lucide-send"
         size="lg"
-        class="justify-self-start"
+        class="send-button"
       >Send message</UButton>
     </UForm>
-    <div class="flex flex-wrap items-center justify-between gap-4 border-t border-default pt-6">
-      <p class="text-sm text-muted">Code, craft, or a good conversation.</p>
-      <div class="flex flex-wrap gap-2">
+    <div class="contact-footer">
+      <p>Code, craft, or a good conversation.</p>
+      <div class="social-links">
         <UButton
           v-for="social in socials"
           :key="social.label"
@@ -173,3 +173,88 @@ async function submit(event: FormSubmitEvent<z.output<typeof schema>>) {
     </div>
   </section>
 </template>
+
+<style scoped>
+.contact {
+  margin-bottom: 2rem;
+  scroll-margin-top: 6rem;
+  background: var(--ui-bg-muted);
+  padding: 2rem 1.25rem;
+}
+.contact-eyebrow, .contact-intro, .contact-footer > p {
+  color: var(--ui-text-muted);
+}
+.contact-heading {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-block: 2rem;
+}
+.contact-title {
+  font-size: 2.25rem;
+  line-height: 1.25;
+  font-weight: 600;
+}
+.contact-title span {
+  color: var(--ui-primary);
+}
+.contact-intro {
+  line-height: 1.625;
+}
+.contact-form {
+  display: grid;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+.contact-fields {
+  display: grid;
+  gap: 1.25rem;
+}
+.contact-input {
+  width: 100%;
+}
+.botcheck {
+  display: none;
+}
+.send-button {
+  justify-self: start;
+}
+.contact-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--ui-border);
+}
+.contact-footer > p {
+  font-size: 0.875rem;
+}
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+@media (min-width: 640px) {
+  .contact {
+    padding: 3rem;
+  }
+  .contact-heading {
+    flex-direction: row;
+    align-items: center;
+  }
+  .contact-title {
+    font-size: 3rem;
+  }
+  .contact-fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1024px) {
+  .contact-title {
+    font-size: 3.75rem;
+  }
+}
+</style>

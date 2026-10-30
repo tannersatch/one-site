@@ -19,6 +19,9 @@ import BFFSidebar from "~/components/bff/BFFSidebar.vue";
 .page {
   display: flex;
   flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
   padding: 1rem;
   max-height: calc(100vh - 112px);
   overflow-y: auto;

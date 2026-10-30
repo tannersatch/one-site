@@ -146,14 +146,14 @@ const testimonials = ref([
 </script>
 
 <template>
-  <UPageColumns>
+  <UPageColumns class="testimonials">
     <UPageCard
       variant="solid"
       to="https://cloudflare.com"
       icon="i-logos-cloudflare-icon"
       title="Cloudflare's Workers LaunchPad"
       description="NuxtHub is part of the Cloudflare's Workers Launchpad Cohort to make sure you get a first-class experience on top of Cloudflare's network."
-      :ui="{ leadingIcon: 'size-10' }"
+      :ui="{ leadingIcon: 'sponsor-icon' }"
     />
 
     <UPageCard
@@ -161,7 +161,7 @@ const testimonials = ref([
       :key="index"
       variant="subtle"
       :description="testimonial.quote"
-      :ui="{ description: 'before:content-[open-quote] after:content-[close-quote]' }"
+      :ui="{ description: 'testimonial-quote' }"
     >
       <template #footer>
         <UUser v-bind="testimonial.user" size="xl" />
@@ -169,3 +169,16 @@ const testimonials = ref([
     </UPageCard>
   </UPageColumns>
 </template>
+
+<style scoped>
+.testimonials :deep(.sponsor-icon) {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+.testimonials :deep(.testimonial-quote)::before {
+  content: open-quote;
+}
+.testimonials :deep(.testimonial-quote)::after {
+  content: close-quote;
+}
+</style>

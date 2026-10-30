@@ -5,31 +5,33 @@ defineProps<{ resumeUrl: string }>();
 <template>
   <section
     id="about"
-    class="portfolio-section grid gap-10 md:grid-cols-[1fr_1.2fr] lg:gap-20"
+    class="portfolio-section about"
     aria-labelledby="about-title"
   >
     <div class="portfolio-reveal">
-      <p class="portfolio-eyebrow mb-4 text-muted">02 / A LITTLE ABOUT ME</p>
+      <p class="portfolio-eyebrow about-eyebrow">02 / A LITTLE ABOUT ME</p>
       <h2 id="about-title" class="portfolio-title">
-        A builder,<br>in every sense<span class="text-primary">.</span>
+        A builder,<br>in every sense<span class="about-accent">.</span>
       </h2>
     </div>
-    <div class="portfolio-reveal space-y-5 leading-8 text-muted">
-      <p class="text-xl leading-relaxed text-highlighted lg:text-2xl">
-        From a line of code to a piece of wood, I love turning an idea into
+    <div class="portfolio-reveal about-copy">
+      <p class="about-lead">
+        From a line of code to a 3D-printed design, I love turning an idea into
         something you can actually use.
       </p>
       <p>
-        I'm a software developer and craftsman passionate about building
-        intuitive applications and unique handcrafted pieces. With a background
-        in full stack engineering, I founded Big Foot Forward LLC to bring
-        innovative ideas to life, whether in the digital world or the workshop.
+        I'm a software developer and maker passionate about building intuitive
+        applications and designing 3D models for custom prints. With a
+        background in full stack engineering, I founded Big Foot Forward LLC to
+        bring innovative ideas to life, from digital experiences to physical
+        prints.
       </p>
       <p>
-        When I'm not coding or woodworking, you'll find me learning new tech,
-        experimenting with designs, or enjoying time outdoors.
+        When I'm not coding, designing 3D models, or 3D printing, you'll find me
+        learning new tech, experimenting with designs, or enjoying time
+        outdoors.
       </p>
-      <div class="flex flex-wrap items-center gap-3 pt-2">
+      <div class="about-links">
         <UBadge
           icon="i-lucide-footprints"
           color="neutral"
@@ -47,3 +49,49 @@ defineProps<{ resumeUrl: string }>();
     </div>
   </section>
 </template>
+
+<style scoped>
+.about {
+  display: grid;
+  gap: 2.5rem;
+}
+.about-eyebrow {
+  margin-bottom: 1rem;
+  color: var(--ui-text-muted);
+}
+.about-accent {
+  color: var(--ui-primary);
+}
+.about-copy {
+  line-height: 2;
+  color: var(--ui-text-muted);
+}
+.about-copy > * + * {
+  margin-top: 1.25rem;
+}
+.about-lead {
+  font-size: 1.25rem;
+  line-height: 1.625;
+  color: var(--ui-text-highlighted);
+}
+.about-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  padding-top: 0.5rem;
+}
+@media (min-width: 768px) {
+  .about {
+    grid-template-columns: 1fr 1.2fr;
+  }
+}
+@media (min-width: 1024px) {
+  .about {
+    gap: 5rem;
+  }
+  .about-lead {
+    font-size: 1.5rem;
+  }
+}
+</style>

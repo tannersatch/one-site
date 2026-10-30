@@ -1,16 +1,17 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
 
-@theme {
-  --font-sans: "Outfit", sans-serif;
-}
-
 :root {
+  --font-sans: "Outfit", sans-serif;
   --ui-radius: 0.75rem;
   --breakpoint-lg: 1024px;
   --breakpoint-md: 768px;
   --breakpoint-sm: 640px;
   --breakpoint-xs: 480px;
+}
+
+body {
+  font-family: "Outfit", sans-serif;
 }
 
 :root, .light {

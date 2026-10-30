@@ -52,8 +52,8 @@ function onSubmit(payload: FormSubmitEvent<Schema>) {
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-center gap-4 p-4">
-    <UPageCard class="w-full max-w-md">
+  <div class="login-page">
+    <UPageCard class="login-card">
       <UAuthForm
         :schema="schema"
         title="Login"
@@ -66,3 +66,18 @@ function onSubmit(payload: FormSubmitEvent<Schema>) {
     </UPageCard>
   </div>
 </template>
+
+<style scoped>
+.login-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+.login-card {
+  width: 100%;
+  max-width: 28rem;
+}
+</style>

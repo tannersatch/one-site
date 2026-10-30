@@ -8,7 +8,7 @@ const skills = [
   {
     title: "Libraries & frameworks",
     icon: "i-lucide-blocks",
-    items: ["React", "React Native", "Express", "Svelte", "SvelteKit"],
+    items: ["Vue", "Nuxt","React", "React Native", "Express", "Svelte", "SvelteKit"],
   },
   {
     title: "Tools & platforms",
@@ -25,27 +25,27 @@ const skills = [
 
 <template>
   <section id="skills" class="portfolio-section" aria-labelledby="skills-title">
-    <div class="portfolio-reveal mb-10">
-      <p class="portfolio-eyebrow mb-4 text-muted">03 / THE TOOLKIT</p>
+    <div class="portfolio-reveal skills-heading">
+      <p class="portfolio-eyebrow skills-eyebrow">03 / THE TOOLKIT</p>
       <h2 id="skills-title" class="portfolio-title">
-        Different tools. Same curiosity<span class="text-primary">.</span>
+        Different tools. Same curiosity<span class="skills-accent">.</span>
       </h2>
     </div>
-    <div class="grid grid-cols-2 gap-x-4 gap-y-8 md:gap-8 lg:grid-cols-4">
+    <div class="skills-grid">
       <div
         v-for="(group, index) in skills"
         :key="group.title"
-        class="portfolio-reveal border-t-2 border-inverted pt-5"
+        class="portfolio-reveal skill-group"
       >
-        <div class="flex items-center justify-between text-xs text-muted">
-          <UIcon :name="group.icon" class="size-6 text-primary" /><span>0{{
+        <div class="skill-meta">
+          <UIcon :name="group.icon" class="skill-icon" /><span>0{{
               index + 1
             }}</span>
         </div>
-        <h3 class="mt-6 mb-4 min-h-12 font-semibold text-highlighted lg:min-h-0">
+        <h3 class="skill-title">
           {{ group.title }}
         </h3>
-        <div class="flex flex-wrap gap-2">
+        <div class="skill-tags">
           <UBadge
             v-for="skill in group.items"
             :key="skill"
@@ -58,3 +58,60 @@ const skills = [
     </div>
   </section>
 </template>
+
+<style scoped>
+.skills-heading {
+  margin-bottom: 2.5rem;
+}
+.skills-eyebrow {
+  margin-bottom: 1rem;
+  color: var(--ui-text-muted);
+}
+.skills-accent, .skill-icon {
+  color: var(--ui-primary);
+}
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem 1rem;
+}
+.skill-group {
+  border-top: 2px solid var(--ui-border-inverted);
+  padding-top: 1.25rem;
+}
+.skill-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--ui-text-muted);
+}
+.skill-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.skill-title {
+  margin-block: 1.5rem 1rem;
+  min-height: 3rem;
+  font-weight: 600;
+  color: var(--ui-text-highlighted);
+}
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+@media (min-width: 768px) {
+  .skills-grid {
+    gap: 2rem;
+  }
+}
+@media (min-width: 1024px) {
+  .skills-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .skill-title {
+    min-height: 0;
+  }
+}
+</style>
