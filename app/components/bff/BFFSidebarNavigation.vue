@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from "@nuxt/ui";
+import { tools } from "~/data/tools";
 
 withDefaults(defineProps<{ collapsed?: boolean }>(), {
   collapsed: false,
@@ -8,12 +9,11 @@ defineEmits<{ expand: [] }>();
 
 const items: NavigationMenuItem[][] = [[
   { label: "Home", icon: "i-lucide-home", to: "/tools" },
-  { label: "JWT Decoder", icon: "i-lucide-braces", to: "/tools/jwt-decode" },
-  {
-    label: "Roman Numeral Converter",
-    icon: "i-lucide-landmark",
-    to: "/tools/roman-numeral-converter",
-  },
+  ...tools.map(tool => ({
+    label: tool.navigationLabel ?? tool.title,
+    icon: tool.icon,
+    to: tool.to,
+  })),
 ], [
   {
     label: "Feedback",
