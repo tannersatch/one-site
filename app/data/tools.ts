@@ -12,6 +12,16 @@ export interface DeveloperTool {
 
 export const tools: DeveloperTool[] = [
   {
+    id: "regex-tester",
+    title: "Regex Tester",
+    description: "Test JavaScript regex patterns with highlighted matches, capture groups, and a worker timeout.",
+    category: "Text & patterns",
+    icon: "i-lucide-regex",
+    to: "/tools/regex-tester",
+    keywords: ["regex", "regexp", "regular expression", "pattern", "match", "capture", "flags"],
+    tags: ["JavaScript", "Worker timeout"],
+  },
+  {
     id: "diff-checker",
     title: "Diff Checker",
     description: "Compare two texts with line numbers, word changes, and whitespace options.",

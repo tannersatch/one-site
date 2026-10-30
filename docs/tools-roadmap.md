@@ -12,8 +12,8 @@ commit before starting the next increment. Do not commit automatically.
 | 4         | JSON / YAML converter | Both directions, parser errors, copy; document YAML-to-JSON limitations | Committed                      |
 | 5         | Unix timestamp        | Seconds/milliseconds, UTC/local dates, current time, copy               | Committed                      |
 | 6         | Markdown previewer    | Live preview, sanitized HTML, safe external links                       | Committed                      |
-| 7         | Diff checker          | Two inputs, line/word changes, whitespace options                       | Complete; awaiting user commit |
-| 8         | Regex tester          | Flags, matches/groups, invalid expressions, worker timeout              | Pending                        |
+| 7         | Diff checker          | Two inputs, line/word changes, whitespace options                       | Committed                      |
+| 8         | Regex tester          | Flags, matches/groups, invalid expressions, worker timeout              | Complete; awaiting user commit |
 
 ## Shared Conventions
 
@@ -130,3 +130,25 @@ commit before starting the next increment. Do not commit automatically.
 - Verify clipboard actions, selectors, long-text containment, both themes,
   directory/mobile registration, and responsive layouts. Run all tests and the
   production build before pausing for commit.
+
+## Increment 8 Acceptance Checks
+
+- Use native JavaScript RegExp only in disposable Web Workers, never execute a
+  user pattern on the UI thread, and terminate each run after one second.
+- Debounce edits, terminate prior workers on changes/unmount, ignore stale messages,
+  and clear match output and copying while testing or after errors.
+- Support global, ignore-case, multiline, dot-all, Unicode, sticky, indices, and
+  Unicode-set flags. Keep `u`/`v` mutually exclusive; report unsupported flags using
+  the browser's native error.
+- Display safe text highlights, full matches, positional/named captures, unmatched
+  and empty captures, and optional indices. Offsets are UTF-16 code-unit positions.
+- Advance zero-length global matches safely, respecting Unicode surrogate pairs.
+- Bound input to 5,000 pattern characters and 100,000 test-text characters. Limit
+  results to 1,000 matches, 200,000 captured characters, and 5,000 capture entries;
+  show a truncation warning when those output limits are reached.
+- Provide Run, Example, Clear, and copyable match JSON. Empty pattern input means
+  no expression; use an explicit empty expression such as `(?:)` to test empty matches.
+- Verify a real pathological pattern times out while the browser stays responsive,
+  recovery/cancellation, safe markup handling, flags, captures, both themes,
+  directory/mobile registration, and responsive layouts. Run the full suite and
+  production build before pausing for the final commit.
