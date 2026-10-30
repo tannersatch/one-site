@@ -11,8 +11,8 @@ commit before starting the next increment. Do not commit automatically.
 | 3         | JSON to TypeScript    | Root type name, nested objects/arrays, generated types, copy            | Committed                      |
 | 4         | JSON / YAML converter | Both directions, parser errors, copy; document YAML-to-JSON limitations | Committed                      |
 | 5         | Unix timestamp        | Seconds/milliseconds, UTC/local dates, current time, copy               | Committed                      |
-| 6         | Markdown previewer    | Live preview, sanitized HTML, safe external links                       | Complete; awaiting user commit |
-| 7         | Diff checker          | Two inputs, line/word changes, whitespace options                       | Pending                        |
+| 6         | Markdown previewer    | Live preview, sanitized HTML, safe external links                       | Committed                      |
+| 7         | Diff checker          | Two inputs, line/word changes, whitespace options                       | Complete; awaiting user commit |
 | 8         | Regex tester          | Flags, matches/groups, invalid expressions, worker timeout              | Pending                        |
 
 ## Shared Conventions
@@ -113,3 +113,20 @@ commit before starting the next increment. Do not commit automatically.
 - Verify sanitization in the browser, zero default image requests, opt-in loading,
   long-content containment, both themes, directory/mobile links, and responsive
   layouts. Run all tool tests before the commit pause.
+
+## Increment 7 Acceptance Checks
+
+- Compare two editable texts with line and word views using an established diff
+  library. Display line numbers, addition/removal markers, and inline word changes.
+- Offer exact spaces, trimmed line edges, and ignored spaces/tabs, plus optional
+  case-insensitive comparison. Preserve input values; normalize CRLF/CR to LF for
+  comparison. Line numbers and copied patches describe the compared text.
+- Generate copyable unified patches and verify they apply to the compared input.
+- Include Swap, Example, and Clear actions. Debounce edits and remove stale patch
+  output while recomputing, after errors, or when inputs are cleared.
+- Bound input to 100,000 characters per side, edit distance to 2,000, each diff
+  calculation to 250ms, and line-view results to 3,000 rows. Explain exceeded limits.
+- Render all diff content as plain Vue text; pasted HTML must not execute.
+- Verify clipboard actions, selectors, long-text containment, both themes,
+  directory/mobile registration, and responsive layouts. Run all tests and the
+  production build before pausing for commit.

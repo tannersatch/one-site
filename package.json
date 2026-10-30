@@ -23,6 +23,7 @@
   "dependencies": {
     "@nuxt/eslint": "1.17.0",
     "@nuxt/ui": "^4.11.3",
+    "diff": "^9.0.0",
     "dprint": "^0.61.1",
     "eslint": "^10.12.0",
     "jsonc-parser": "^3.3.1",

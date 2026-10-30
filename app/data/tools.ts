@@ -12,6 +12,16 @@ export interface DeveloperTool {
 
 export const tools: DeveloperTool[] = [
   {
+    id: "diff-checker",
+    title: "Diff Checker",
+    description: "Compare two texts with line numbers, word changes, and whitespace options.",
+    category: "Text comparison",
+    icon: "i-lucide-git-compare-arrows",
+    to: "/tools/diff-checker",
+    keywords: ["diff", "compare", "difference", "text", "line", "word", "patch", "whitespace"],
+    tags: ["Lines / Words", "Unified patch"],
+  },
+  {
     id: "markdown-previewer",
     title: "Markdown Previewer",
     description: "Preview Markdown and sanitized HTML with tables, task lists, and safe links.",
