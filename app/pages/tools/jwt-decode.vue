@@ -2,6 +2,8 @@
 import { jwtDecode } from "jwt-decode";
 import sign from "jwt-encode";
 import JwtEditor from "~/components/tools/JwtEditor.vue";
+import ToolPage from "~/components/tools/ToolPage.vue";
+import ToolToolbar from "~/components/tools/ToolToolbar.vue";
 
 definePageMeta({
   title: "JWT Encode / Decode",
@@ -134,24 +136,21 @@ function clear() {
 </script>
 
 <template>
-  <main class="jwt-tool">
-    <header class="tool-heading">
-      <div class="tool-title">
-        <div class="tool-icon"><UIcon name="i-lucide-braces" /></div>
-        <div>
-          <p class="tool-category">DEVELOPER TOOLS</p>
-          <h1>JWT Encode / Decode</h1>
-        </div>
-      </div>
+  <ToolPage
+    title="JWT Encode / Decode"
+    icon="i-lucide-braces"
+    max-width="1400px"
+    class="jwt-tool"
+  >
+    <template v-if="jwtValue && !errorMessage" #status>
       <UBadge
-        v-if="jwtValue && !errorMessage"
         color="warning"
         variant="subtle"
         icon="i-lucide-shield-alert"
       >Signature unverified</UBadge>
-    </header>
+    </template>
 
-    <div class="tool-toolbar">
+    <ToolToolbar @clear="clear">
       <UTabs
         v-model="mode"
         :items="modes"
@@ -159,21 +158,15 @@ function clear() {
         class="mode-control"
         aria-label="JWT mode"
       />
-      <div class="toolbar-actions">
+      <template #actions>
         <UButton
           icon="i-lucide-flask-conical"
           color="neutral"
           variant="ghost"
           @click="loadExample"
         >Example</UButton>
-        <UButton
-          icon="i-lucide-eraser"
-          color="neutral"
-          variant="ghost"
-          @click="clear"
-        >Clear</UButton>
-      </div>
-    </div>
+      </template>
+    </ToolToolbar>
 
     <div aria-live="polite" aria-atomic="true">
       <UAlert
@@ -274,76 +267,13 @@ function clear() {
       <span><UIcon name="i-lucide-lock-keyhole" />Local processing</span><span
       >Signature verification not performed</span>
     </footer>
-  </main>
+  </ToolPage>
 </template>
 
 <style scoped>
-.jwt-tool {
-  width: 100%;
-  max-width: 1400px;
-  min-width: 0;
-  margin-inline: auto;
-  padding: 0.5rem;
-}
-.tool-heading {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding-bottom: 1.5rem;
-}
-.tool-title {
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-  min-width: 0;
-}
-.tool-icon {
-  display: grid;
-  place-items: center;
-  width: 2.75rem;
-  height: 2.75rem;
-  flex-shrink: 0;
-  border: 1px solid var(--ui-border);
-  border-radius: 0.5rem;
-  background: var(--ui-bg-muted);
-  color: var(--ui-primary);
-}
-.tool-icon .iconify {
-  width: 1.4rem;
-  height: 1.4rem;
-}
-.tool-category {
-  margin-bottom: 0.2rem;
-  font-size: 0.625rem;
-  font-weight: 600;
-  color: var(--ui-text-muted);
-}
-h1 {
-  font-size: 1.5rem;
-  line-height: 1.25;
-  font-weight: 600;
-  color: var(--ui-text-highlighted);
-}
-.tool-toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  padding-block: 1rem;
-  margin-bottom: 1.25rem;
-  border-block: 1px solid var(--ui-border);
-}
 .mode-control {
   width: 15rem;
   max-width: 100%;
-}
-.toolbar-actions {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
 }
 .tool-error {
   margin-bottom: 1rem;
@@ -419,29 +349,8 @@ h1 {
     align-items: stretch;
   }
 }
-@media (min-width: 1280px) {
-  .jwt-tool {
-    padding: 1rem;
-  }
-  h1 {
-    font-size: 1.75rem;
-  }
-}
 @media (max-width: 479px) {
-  .jwt-tool {
-    padding: 0;
-  }
-  h1 {
-    font-size: 1.25rem;
-  }
-  .tool-toolbar {
-    align-items: stretch;
-  }
   .mode-control {
-    width: 100%;
-  }
-  .toolbar-actions {
-    justify-content: flex-end;
     width: 100%;
   }
 }

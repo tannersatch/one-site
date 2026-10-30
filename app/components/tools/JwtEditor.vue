@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const props = withDefaults(
+import CopyButton from "~/components/tools/CopyButton.vue";
+
+withDefaults(
   defineProps<{
     id: string;
     label: string;
@@ -14,25 +16,6 @@ const props = withDefaults(
 );
 
 defineEmits<{ "update:modelValue": [value: string] }>();
-
-const toast = useToast();
-const copied = ref(false);
-let copyTimer: ReturnType<typeof setTimeout> | undefined;
-
-async function copy() {
-  try {
-    await navigator.clipboard.writeText(props.modelValue);
-    copied.value = true;
-    clearTimeout(copyTimer);
-    copyTimer = setTimeout(() => {
-      copied.value = false;
-    }, 2000);
-  } catch {
-    toast.add({ title: "Couldn't copy to clipboard", color: "error" });
-  }
-}
-
-onBeforeUnmount(() => clearTimeout(copyTimer));
 </script>
 
 <template>
@@ -47,18 +30,10 @@ onBeforeUnmount(() => clearTimeout(copyTimer));
         />{{ label }}</label>
       <div class="editor-actions">
         <UBadge color="neutral" variant="soft" size="sm">{{ format }}</UBadge>
-        <UTooltip :text="copied ? 'Copied' : `Copy ${label.toLowerCase()}`">
-          <UButton
-            :icon="copied ? 'i-lucide-check' : 'i-lucide-copy'"
-            :aria-label="`Copy ${label.toLowerCase()}`"
-            :disabled="!modelValue"
-            color="neutral"
-            variant="ghost"
-            size="sm"
-            class="copy-button"
-            @click="copy"
-          />
-        </UTooltip>
+        <CopyButton
+          :value="modelValue"
+          :label="`Copy ${label.toLowerCase()}`"
+        />
       </div>
     </div>
     <UTextarea
@@ -111,11 +86,6 @@ onBeforeUnmount(() => clearTimeout(copyTimer));
   width: 1rem;
   height: 1rem;
   color: var(--ui-primary);
-}
-.copy-button {
-  width: 1.75rem;
-  height: 1.75rem;
-  justify-content: center;
 }
 .editor-input {
   display: flex;

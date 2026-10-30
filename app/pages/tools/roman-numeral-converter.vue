@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import CopyButton from "~/components/tools/CopyButton.vue";
+import ToolPage from "~/components/tools/ToolPage.vue";
+import ToolToolbar from "~/components/tools/ToolToolbar.vue";
 import { decimalToRoman, romanToDecimal } from "~/utils/romanNumerals";
 
 definePageMeta({
@@ -14,9 +17,6 @@ useSeoMeta({
 const decimalValue = ref("2026");
 const romanValue = ref(decimalToRoman(decimalValue.value));
 const errorMessage = ref("");
-const copiedField = ref<string | null>(null);
-const toast = useToast();
-let copyTimer: ReturnType<typeof setTimeout> | undefined;
 const examples = [4, 9, 42, 99, 2026, 3999].map(value => ({
   decimal: String(value),
   roman: decimalToRoman(String(value)),
@@ -43,7 +43,6 @@ const breakdown = computed(() =>
 
 function updateValue(value: string | number, field: "decimal" | "roman") {
   errorMessage.value = "";
-  copiedField.value = null;
   if (field === "decimal") decimalValue.value = String(value);
   else romanValue.value = String(value).trim().toUpperCase();
 
@@ -60,61 +59,32 @@ function updateValue(value: string | number, field: "decimal" | "roman") {
   }
 }
 
-async function copyValue(value: string, field: string) {
-  try {
-    await navigator.clipboard.writeText(value);
-    copiedField.value = field;
-    clearTimeout(copyTimer);
-    copyTimer = setTimeout(() => {
-      copiedField.value = null;
-    }, 2000);
-  } catch {
-    toast.add({ title: "Couldn't copy to clipboard", color: "error" });
-  }
-}
-
 function clear() {
   updateValue("", "decimal");
 }
-
-onBeforeUnmount(() => clearTimeout(copyTimer));
 </script>
 
 <template>
-  <main class="numeral-tool">
-    <header class="tool-heading">
-      <div class="tool-title">
-        <div class="tool-icon"><UIcon name="i-lucide-landmark" /></div>
-        <div>
-          <p class="tool-category">DEVELOPER TOOLS</p>
-          <h1>Roman Numeral Converter</h1>
-        </div>
-      </div>
+  <ToolPage
+    title="Roman Numeral Converter"
+    icon="i-lucide-landmark"
+    class="numeral-tool"
+  >
+    <template #status>
       <UBadge color="neutral" variant="subtle">1 &ndash; 3999</UBadge>
-    </header>
+    </template>
 
-    <div class="tool-toolbar">
-      <h2>Conversion</h2><UButton
-        icon="i-lucide-eraser"
-        color="neutral"
-        variant="ghost"
-        @click="clear"
-      >Clear</UButton>
-    </div>
+    <ToolToolbar title="Conversion" @clear="clear" />
 
     <div class="conversion-grid">
       <section class="conversion-panel" aria-labelledby="decimal-label">
         <div class="panel-heading">
           <label id="decimal-label" for="decimal-input"
-          >Decimal number</label><UTooltip text="Copy number"><UButton
-              :icon="copiedField === 'decimal' ? 'i-lucide-check' : 'i-lucide-copy'"
-              aria-label="Copy number"
-              :disabled="!hasResult"
-              color="neutral"
-              variant="ghost"
-              class="copy-button"
-              @click="copyValue(decimalValue, 'decimal')"
-            /></UTooltip>
+          >Decimal number</label><CopyButton
+            :value="decimalValue"
+            label="Copy number"
+            :disabled="!hasResult"
+          />
         </div>
         <UInput
           id="decimal-input"
@@ -136,15 +106,11 @@ onBeforeUnmount(() => clearTimeout(copyTimer));
       <section class="conversion-panel" aria-labelledby="roman-label">
         <div class="panel-heading">
           <label id="roman-label" for="roman-input"
-          >Roman numeral</label><UTooltip text="Copy Roman numeral"><UButton
-              :icon="copiedField === 'roman' ? 'i-lucide-check' : 'i-lucide-copy'"
-              aria-label="Copy Roman numeral"
-              :disabled="!hasResult"
-              color="neutral"
-              variant="ghost"
-              class="copy-button"
-              @click="copyValue(romanValue, 'roman')"
-            /></UTooltip>
+          >Roman numeral</label><CopyButton
+            :value="romanValue"
+            label="Copy Roman numeral"
+            :disabled="!hasResult"
+          />
         </div>
         <UInput
           id="roman-input"
@@ -219,68 +185,20 @@ onBeforeUnmount(() => clearTimeout(copyTimer));
         </div>
       </dl>
     </section>
-  </main>
+  </ToolPage>
 </template>
 
 <style scoped>
-.numeral-tool {
-  width: 100%;
-  max-width: 1200px;
-  min-width: 0;
-  margin-inline: auto;
-  padding: 0.5rem;
-}
-.tool-heading, .tool-title, .tool-toolbar, .panel-heading, .section-heading {
+.panel-heading, .section-heading {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
 }
-.tool-heading {
-  flex-wrap: wrap;
-  padding-bottom: 1.5rem;
-}
-.tool-title {
-  justify-content: flex-start;
-  min-width: 0;
-  gap: 0.85rem;
-}
-.tool-icon {
-  display: grid;
-  place-items: center;
-  width: 2.75rem;
-  height: 2.75rem;
-  flex-shrink: 0;
-  border: 1px solid var(--ui-border);
-  border-radius: 0.5rem;
-  background: var(--ui-bg-muted);
-  color: var(--ui-primary);
-}
-.tool-icon .iconify {
-  width: 1.4rem;
-  height: 1.4rem;
-}
-.tool-category {
-  margin-bottom: 0.2rem;
-  font-size: 0.625rem;
-  font-weight: 600;
-  color: var(--ui-text-muted);
-}
-h1 {
-  font-size: 1.5rem;
-  line-height: 1.25;
-  font-weight: 600;
-  color: var(--ui-text-highlighted);
-}
 h2 {
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--ui-text-highlighted);
-}
-.tool-toolbar {
-  padding-block: 0.75rem;
-  margin-bottom: 1.5rem;
-  border-block: 1px solid var(--ui-border);
 }
 .conversion-grid {
   display: grid;
@@ -297,12 +215,6 @@ h2 {
   margin-bottom: 1rem;
   font-size: 0.875rem;
   font-weight: 600;
-}
-.copy-button {
-  width: 2rem;
-  height: 2rem;
-  flex-shrink: 0;
-  justify-content: center;
 }
 .conversion-input {
   width: 100%;
@@ -418,22 +330,8 @@ h2 {
   }
 }
 @media (min-width: 1280px) {
-  .numeral-tool {
-    padding: 1rem;
-  }
-  h1 {
-    font-size: 1.75rem;
-  }
   .roman-input :deep(input) {
     font-size: 1.75rem;
-  }
-}
-@media (max-width: 479px) {
-  .numeral-tool {
-    padding: 0;
-  }
-  h1 {
-    font-size: 1.25rem;
   }
 }
 </style>
