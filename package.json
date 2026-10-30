@@ -29,6 +29,7 @@
     "jwt-decode": "^4.0.0",
     "jwt-encode": "^1.0.1",
     "nuxt": "^4.6.0",
+    "quicktype-core": "^26.0.0",
     "roman-numerals": "^0.3.2",
     "sql-formatter": "^15.9.0",
     "tailwindcss": "^4.3.3",

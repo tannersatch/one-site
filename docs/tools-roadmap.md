@@ -7,8 +7,8 @@ commit before starting the next increment. Do not commit automatically.
 | Increment | Tool                  | Scope                                                                   | Status                         |
 | --------- | --------------------- | ----------------------------------------------------------------------- | ------------------------------ |
 | 1         | JSON formatter        | Strict validation, format/minify, indentation, copy, lossless numbers   | Committed                      |
-| 2         | SQL formatter         | SQL dialect selection, format, copy, examples                           | Complete; awaiting user commit |
-| 3         | JSON to TypeScript    | Root type name, nested objects/arrays, generated types, copy            | Pending                        |
+| 2         | SQL formatter         | SQL dialect selection, format, copy, examples                           | Committed                      |
+| 3         | JSON to TypeScript    | Root type name, nested objects/arrays, generated types, copy            | Complete; awaiting user commit |
 | 4         | YAML / JSON converter | Both directions, parser errors, copy; document YAML-to-JSON limitations | Pending                        |
 | 5         | Unix timestamp        | Seconds/milliseconds, UTC/local dates, current time, copy               | Pending                        |
 | 6         | Markdown previewer    | Live preview, sanitized HTML, safe external links                       | Pending                        |
@@ -49,3 +49,16 @@ commit before starting the next increment. Do not commit automatically.
 - Formatting must not execute SQL or claim semantic validation.
 - Verify clipboard actions, directory/mobile navigation registration, both themes,
   and responsive layouts. Run SQL and JSON tests together before the commit pause.
+
+## Increment 3 Acceptance Checks
+
+- Infer nested objects, optional array-item properties, unions, nulls, and empty
+  arrays using an established inference library; retain JSON strings as strings.
+- Preserve the root JSON shape, including arrays and primitives. Expose a named
+  exported root alias with namespaced inferred definitions to avoid collisions.
+- Validate root names and strict JSON with useful error locations.
+- Generate types only, without runtime converters, and load the engine on demand.
+- Debounce editing and ignore stale generation results; clearing or invalid input
+  must remove old output and disable copying.
+- Verify clipboard actions, directory/mobile registration, both themes, and
+  responsive layouts; run inference, JSON, and SQL tests before pausing for commit.

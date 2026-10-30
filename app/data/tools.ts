@@ -12,6 +12,16 @@ export interface DeveloperTool {
 
 export const tools: DeveloperTool[] = [
   {
+    id: "json-to-typescript",
+    title: "JSON to TypeScript",
+    description: "Infer TypeScript types from JSON with nested objects, arrays, and optional properties.",
+    category: "Code generation",
+    icon: "i-lucide-file-code",
+    to: "/tools/json-to-typescript",
+    keywords: ["json", "typescript", "types", "interfaces", "infer", "generate", "ts"],
+    tags: ["TypeScript", "Inference"],
+  },
+  {
     id: "sql-formatter",
     title: "SQL Formatter",
     description: "Format SQL for your dialect with keyword case and indentation options.",
