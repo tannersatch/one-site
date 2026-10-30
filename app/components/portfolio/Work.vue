@@ -55,13 +55,13 @@ const projects = [
 
 <template>
   <section id="work" class="portfolio-section" aria-labelledby="work-title">
-    <div class="portfolio-reveal work-heading">
+    <div v-reveal class="work-heading">
       <p class="portfolio-eyebrow work-eyebrow">01 / SELECTED WORK</p>
       <h2 id="work-title" class="portfolio-title">
         Built for the real world<span class="work-accent">.</span>
       </h2>
     </div>
-    <article class="portfolio-reveal featured-project">
+    <article v-reveal class="featured-project">
       <div class="featured-image">
         <img
           :src="lightingImage"
@@ -116,6 +116,7 @@ const projects = [
     </article>
     <div class="more-projects">
       <article
+        v-reveal
         v-for="project in projects"
         :key="project.title"
         class="secondary-project"

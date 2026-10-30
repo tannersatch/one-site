@@ -16,7 +16,7 @@ useSeoMeta({
 <template>
   <main class="home">
     <UContainer>
-      <header class="home-heading">
+      <header v-reveal class="home-heading">
         <p class="home-eyebrow">SOFTWARE / DESIGN / MAKING</p>
         <h1>Tanner Satchwell<span>.</span></h1>
         <p class="home-introduction">
@@ -46,7 +46,7 @@ useSeoMeta({
         </SiteDestination>
       </section>
 
-      <section class="workbench" aria-labelledby="workbench-title">
+      <section v-reveal class="workbench" aria-labelledby="workbench-title">
         <h2 id="workbench-title">
           <span class="workbench-dot" />ON THE WORKBENCH
         </h2>

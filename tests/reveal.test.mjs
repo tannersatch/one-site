@@ -11,7 +11,14 @@ function setup(t, reducedMotion = false) {
   const element = new EventTarget();
   element.matches = () => false;
   element.animate = (frames, options) => {
-    const animation = { frames, options, cancelled: false, cancel() { this.cancelled = true; } };
+    const animation = {
+      frames,
+      options,
+      cancelled: false,
+      cancel() {
+        this.cancelled = true;
+      },
+    };
     animations.push(animation);
     return animation;
   };
@@ -22,8 +29,12 @@ function setup(t, reducedMotion = false) {
         Object.assign(this, { callback, options, disconnected: false });
         observers.push(this);
       }
-      observe(target) { this.target = target; }
-      disconnect() { this.disconnected = true; }
+      observe(target) {
+        this.target = target;
+      }
+      disconnect() {
+        this.disconnected = true;
+      }
     },
   };
   t.after(() => {
@@ -100,7 +111,10 @@ test("unmount cleanup disconnects observers and removes listeners", t => {
   const { element, observers } = setup(t);
   let removals = 0;
   const remove = element.removeEventListener.bind(element);
-  element.removeEventListener = (...args) => { removals++; remove(...args); };
+  element.removeEventListener = (...args) => {
+    removals++;
+    remove(...args);
+  };
   const cleanup = revealOnScroll(element);
   cleanup();
   assert.equal(observers[0].disconnected, true);

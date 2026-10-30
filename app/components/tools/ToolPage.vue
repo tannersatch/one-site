@@ -9,7 +9,7 @@ withDefaults(
 
 <template>
   <main class="tool-page" :style="{ maxWidth }">
-    <header class="tool-heading">
+    <header v-reveal class="tool-heading">
       <div class="tool-title">
         <div class="tool-icon"><UIcon :name="icon" /></div>
         <div>

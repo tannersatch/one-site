@@ -32,7 +32,7 @@ const romanExample = decimalToRoman("2026");
           tools.length
         }} tools</UBadge></template>
 
-    <section class="directory-toolbar" aria-label="Find a tool">
+    <section v-reveal class="directory-toolbar" aria-label="Find a tool">
       <UInput
         v-model="query"
         icon="i-lucide-search"
@@ -60,7 +60,7 @@ const romanExample = decimalToRoman("2026");
     </section>
 
     <section aria-labelledby="tools-title">
-      <div class="directory-heading">
+      <div v-reveal class="directory-heading">
         <h2 id="tools-title">
           {{ query.trim() ? "Search results" : "All tools" }}
         </h2><span><UIcon name="i-lucide-lock-keyhole" />Local processing</span>

@@ -6,8 +6,8 @@ defineProps<{ site: SiteEntry; index: number }>();
 
 <template>
   <article
+    v-reveal="index * 80"
     class="site-destination"
-    :style="{ '--entry-delay': `${Math.min(index, 5) * 80}ms` }"
   >
     <div class="destination-preview">
       <slot name="preview">
@@ -54,8 +54,6 @@ defineProps<{ site: SiteEntry; index: number }>();
   min-width: 0;
   padding-block: 1.25rem;
   border-top: 1px solid var(--ui-border);
-  animation: destination-arrive 0.6s ease both;
-  animation-delay: var(--entry-delay);
 }
 .destination-preview {
   position: relative;
@@ -136,16 +134,6 @@ h2 {
   line-height: 1.65;
   color: var(--ui-text-muted);
 }
-@keyframes destination-arrive {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 @media (min-width: 640px) {
   .site-destination {
     grid-template-columns: 7rem minmax(0, 1fr);
@@ -184,9 +172,6 @@ h2 {
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .site-destination {
-    animation: none;
-  }
   .destination-image, .destination-arrow {
     transition: none;
   }
