@@ -12,6 +12,16 @@ export interface DeveloperTool {
 
 export const tools: DeveloperTool[] = [
   {
+    id: "sql-formatter",
+    title: "SQL Formatter",
+    description: "Format SQL for your dialect with keyword case and indentation options.",
+    category: "Formatting & validation",
+    icon: "i-lucide-database",
+    to: "/tools/sql-formatter",
+    keywords: ["sql", "database", "query", "format", "postgresql", "mysql", "sql server", "tsql", "sqlite", "bigquery"],
+    tags: ["6 dialects", "SQL"],
+  },
+  {
     id: "json-formatter",
     title: "JSON Formatter",
     description: "Format, minify, and validate JSON without changing numeric values.",
