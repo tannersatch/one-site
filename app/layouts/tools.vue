@@ -13,8 +13,7 @@ import BFFSidebar from "~/components/bff/BFFSidebar.vue";
 
 <style scoped>
 .dashboard {
-  top: 112px;
-  max-height: calc(100vh - 112px);
+  top: var(--site-chrome-height, var(--ui-header-height));
 }
 .dashboard :deep(.sidebar) {
   min-height: 0;
@@ -29,7 +28,7 @@ import BFFSidebar from "~/components/bff/BFFSidebar.vue";
   min-width: 0;
   min-height: 0;
   padding: 1rem;
-  max-height: calc(100vh - 112px);
+  max-height: calc(100dvh - var(--site-chrome-height, var(--ui-header-height)));
   overflow-y: auto;
 }
 </style>

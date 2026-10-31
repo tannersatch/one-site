@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import BFFBanner from "./BFFBanner.vue";
+import BFFIcon from "./BFFIcon.vue";
 import BFFSidebarNavigation from "./BFFSidebarNavigation.vue";
 </script>
 
@@ -9,6 +11,11 @@ import BFFSidebarNavigation from "./BFFSidebarNavigation.vue";
     class="sidebar"
     :ui="{ footer: 'sidebar-footer' }"
   >
+    <template #header="{ collapsed }">
+      <BFFBanner v-if="!collapsed" />
+      <BFFIcon v-else />
+    </template>
+
     <template #default="{ collapsed, collapse }">
       <BFFSidebarNavigation
         :collapsed="collapsed"
@@ -30,6 +37,11 @@ import BFFSidebarNavigation from "./BFFSidebarNavigation.vue";
 </template>
 
 <style scoped>
+.sidebar {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
 .sidebar-collapse {
   width: 100%;
   justify-content: flex-start;
