@@ -35,14 +35,14 @@ const headerTitle = computed(() => {
 
 <template>
   <UHeader :title="headerTitle">
-    <template
+    <!-- <template
       #title
       v-if="route.path.startsWith('/bff') || route.path.startsWith('/tools')"
     >
       <BFFBanner
         v-if="route.path.startsWith('/bff') || route.path.startsWith('/tools')"
       />
-    </template>
+    </template> -->
 
     <UNavigationMenu :items="items" />
 

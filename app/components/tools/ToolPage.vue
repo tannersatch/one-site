@@ -2,7 +2,7 @@
 withDefaults(
   defineProps<{ title: string; icon: string; maxWidth?: string }>(),
   {
-    maxWidth: "1200px",
+    maxWidth: "1400px",
   },
 );
 </script>

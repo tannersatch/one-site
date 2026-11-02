@@ -59,7 +59,7 @@ const romanExample = decimalToRoman("2026");
       </p>
     </section>
 
-    <section aria-labelledby="tools-title">
+    <section class="tool-directory" aria-labelledby="tools-title">
       <div v-reveal class="directory-heading">
         <h2 id="tools-title">
           {{ query.trim() ? "Search results" : "All tools" }}
@@ -166,6 +166,9 @@ h2 {
   font-size: 0.6875rem;
   color: var(--ui-text-muted);
 }
+.tool-directory {
+  container: tool-directory / inline-size;
+}
 .tool-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -261,9 +264,14 @@ h2 {
   font-size: 1rem;
   font-weight: 600;
 }
-@media (min-width: 700px) {
+@container tool-directory (min-width: 40rem) {
   .tool-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@container tool-directory (min-width: 60rem) {
+  .tool-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 @media (max-width: 479px) {

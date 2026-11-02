@@ -12,8 +12,10 @@ import BFFSidebarNavigation from "./BFFSidebarNavigation.vue";
     :ui="{ footer: 'sidebar-footer' }"
   >
     <template #header="{ collapsed }">
-      <BFFBanner v-if="!collapsed" />
-      <BFFIcon v-else />
+      <div class="sidebar-header">
+        <BFFBanner v-if="!collapsed" />
+        <BFFIcon v-else />
+      </div>
     </template>
 
     <template #default="{ collapsed, collapse }">
@@ -37,6 +39,16 @@ import BFFSidebarNavigation from "./BFFSidebarNavigation.vue";
 </template>
 
 <style scoped>
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-width: 0;
+}
+.sidebar-header :deep(.org-icon) {
+  max-width: 100%;
+}
 .sidebar {
   padding-top: 1rem;
   padding-bottom: 1rem;
