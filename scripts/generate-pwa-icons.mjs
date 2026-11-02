@@ -2,7 +2,7 @@ import { mkdir } from "node:fs/promises";
 import sharp from "sharp";
 
 const directory = new URL("../public/tools/", import.meta.url);
-const source = new URL("../public/favicon-black.svg", import.meta.url);
+const source = new URL("../public/favicon-white.svg", import.meta.url);
 await mkdir(directory, { recursive: true });
 
 for (
@@ -14,7 +14,7 @@ for (
   ]
 ) {
   const artwork = await sharp(source.pathname).resize(Math.round(size * scale)).png().toBuffer();
-  await sharp({ create: { width: size, height: size, channels: 4, background: "#f8fafc" } })
+  await sharp({ create: { width: size, height: size, channels: 4, background: "#18181b" } })
     .composite([{ input: artwork, gravity: "centre" }])
     .png()
     .toFile(new URL(filename, directory).pathname);

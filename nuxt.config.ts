@@ -29,14 +29,14 @@ export default defineNuxtConfig({
     client: { registerPlugin: false },
     manifest: {
       id: "/tools",
-      name: "Tanner's Developer Tools",
+      name: "BFF Dev Tools",
       short_name: "Dev Tools",
       description: "Local developer utilities for text, data, encoding, and design.",
       start_url: "/tools",
       scope: "/tools",
       display: "standalone",
-      theme_color: "#f8fafc",
-      background_color: "#f8fafc",
+      theme_color: "#18181b",
+      background_color: "#18181b",
       icons: [
         { src: "/tools/icon-192.png", sizes: "192x192", type: "image/png", purpose: "any" },
         { src: "/tools/icon-512.png", sizes: "512x512", type: "image/png", purpose: "any" },
