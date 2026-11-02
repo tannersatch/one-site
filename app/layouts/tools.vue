@@ -4,7 +4,7 @@ import Header from "~/components/Header.vue";
 
 useHead({
   link: [{ rel: "apple-touch-icon", href: "/tools/apple-touch-icon.png" }],
-  meta: [{ name: "theme-color", content: "#f8fafc" }],
+  meta: [{ name: "theme-color", content: "#18181b" }],
 });
 
 const siteChrome = useTemplateRef<HTMLDivElement>("siteChrome");
