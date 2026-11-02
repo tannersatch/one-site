@@ -2,6 +2,11 @@
 import BFFSidebar from "~/components/bff/BFFSidebar.vue";
 import Header from "~/components/Header.vue";
 
+useHead({
+  link: [{ rel: "apple-touch-icon", href: "/tools/apple-touch-icon.png" }],
+  meta: [{ name: "theme-color", content: "#f8fafc" }],
+});
+
 const siteChrome = useTemplateRef<HTMLDivElement>("siteChrome");
 let chromeObserver: ResizeObserver | undefined;
 
@@ -27,7 +32,9 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
+  <VitePwaManifest />
   <div ref="siteChrome">
+    <ClientOnly><ToolsPwa /></ClientOnly>
     <UBanner
       icon="i-lucide-construction"
       title="This site is under active development"
