@@ -156,7 +156,7 @@ export const tools: DeveloperTool[] = [
     title: "JWT Encode / Decode",
     navigationLabel: "JWT Decoder",
     description: "Inspect token headers and payloads, or sign a new HS256 token.",
-    category: "Tokens & encoding",
+    category: "Web & encoding",
     icon: "i-lucide-braces",
     to: "/tools/jwt-decode",
     keywords: ["json", "web", "token", "secret", "signature", "encode", "decode"],

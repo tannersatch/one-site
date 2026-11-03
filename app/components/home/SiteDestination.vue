@@ -8,6 +8,7 @@ defineProps<{ site: SiteEntry; index: number }>();
   <article
     v-reveal="index * 80"
     class="site-destination"
+    :class="`site-destination--${site.id}`"
   >
     <div class="destination-preview">
       <slot name="preview">
@@ -65,6 +66,16 @@ defineProps<{ site: SiteEntry; index: number }>();
   overflow: hidden;
   border-radius: 0.375rem;
   background: var(--ui-bg-muted);
+}
+.site-destination--big-foot-forward .destination-preview {
+  background: #d9f86b;
+  color: #18181b;
+}
+.site-destination--big-foot-forward .destination-preview :deep(.org-icon) {
+  color: #18181b;
+}
+.site-destination--developer-tools .destination-preview {
+  background: color-mix(in srgb, var(--ui-primary) 12%, var(--ui-bg));
 }
 .destination-image {
   position: absolute;
@@ -152,7 +163,7 @@ h2 {
     flex-direction: column;
     align-items: stretch;
     gap: 1.5rem;
-    padding: 1.5rem;
+    padding: 1.5rem 1.25rem;
     border-top: 0;
   }
   .site-destination:not(:nth-child(3n)) {
@@ -162,7 +173,7 @@ h2 {
     border-top: 1px solid var(--ui-border);
   }
   .destination-preview {
-    aspect-ratio: 1.8;
+    aspect-ratio: 1.5;
   }
   .destination-meta {
     margin-bottom: 0.85rem;

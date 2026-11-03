@@ -10,10 +10,6 @@
   --breakpoint-xs: 480px;
 }
 
-body {
-  font-family: "Outfit", sans-serif;
-}
-
 :root, .light {
   --ui-bg: var(--ui-color-neutral-50);
   --ui-bg-muted: var(--ui-color-neutral-100);
@@ -27,4 +23,10 @@ body {
   --ui-bg: var(--ui-color-neutral-900);
   --ui-bg-muted: var(--ui-color-neutral-800);
   --ui-text-inverted: var(--ui-color-neutral-900);
+}
+
+body {
+  font-family: "Outfit", sans-serif;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ui-text-dimmed) var(--ui-bg);
 }

@@ -35,11 +35,11 @@ onBeforeUnmount(() => {
   <VitePwaManifest />
   <div ref="siteChrome">
     <ClientOnly><ToolsPwa /></ClientOnly>
-    <UBanner
+    <!-- <UBanner
       icon="i-lucide-construction"
       title="This site is under active development"
       color="warning"
-    />
+    /> -->
   </div>
   <UDashboardGroup class="dashboard">
     <BFFSidebar />

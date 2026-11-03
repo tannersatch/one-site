@@ -27,11 +27,11 @@ onBeforeUnmount(() => {
 
 <template>
   <div ref="siteChrome">
-    <UBanner
+    <!-- <UBanner
       icon="i-lucide-construction"
       title="This site is under active development"
       color="warning"
-    />
+    /> -->
 
     <Header />
   </div>
