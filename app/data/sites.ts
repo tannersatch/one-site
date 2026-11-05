@@ -27,7 +27,7 @@ export const sites: SiteEntry[] = [
     id: "big-foot-forward",
     title: "Big Foot Forward LLC",
     category: "THE BUSINESS",
-    description: "The business behind the ideas. A little about Big Foot Forward.",
+    description: "Thoughtful software, practical guidance, and hands-on making.",
     to: "/bff",
     icon: "i-lucide-footprints",
   },
